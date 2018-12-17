@@ -1,0 +1,13 @@
+{
+  "name": "pn-app",
+  "version": "1.0.0",
+  "description": "demo app for push noti",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "tompascall",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
