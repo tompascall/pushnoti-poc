@@ -8,3 +8,10 @@ services:
     - "8123:8123"
     volumes:
     - ./push-server:/usr/src/push-server
+  app:
+    build: ./app
+    command: nodemon --ext js,html,css server.js
+    ports:
+    - "8124:8124"
+    volumes:
+    - ./app:/usr/src/app

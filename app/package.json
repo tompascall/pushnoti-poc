@@ -1,7 +1,7 @@
 {
   "name": "pn-app",
   "version": "1.0.0",
-  "description": "push server for push noti",
+  "description": "minimal app for testing push noti",
   "scripts": {
     "start": "node server.js"
   },
