@@ -8,6 +8,14 @@ services:
     - "8123:8123"
     volumes:
     - ./push-server:/usr/src/push-server
+    depends_on:
+    - db
+    environment:
+    - DATABASE_HOST=db
+  db:
+    build: ./database
+    # volumes:
+    # - "./data/pn.sql:/docker-entrypoint-initdb.d/000.sql"
   app:
     build: ./app
     command: nodemon --ext js,html,css server.js
