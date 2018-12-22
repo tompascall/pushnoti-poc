@@ -1,28 +1,35 @@
 const pn = {
   onSubscribe() {
-    return fetch('http://localhost:8123/subscribe', {
-      method: 'POST',
-      body: JSON.stringify({ path: `some path - ${new Date().getTime()}` }),
-      headers:{
-        'Content-Type': 'application/json'
-      },
-    })
+    if (pn.config) {
+      return fetch(`${pn.config.pushServerSocketAddres}/subscribe`, {
+        method: 'POST',
+        body: JSON.stringify({ path: `some path - ${new Date().getTime()}` }),
+        headers:{
+          'Content-Type': 'application/json'
+        },
+      })
+    } else {
+      console.log('WTF');
+      return null;
+    }
+  },
+
+  setConfig: async function () {
+    await fetch(`${location.origin}/api-config`)
       .then(async (res) => {
         if (!res.ok) {
           throw new Error('BAD');
         } else {
-          const result = await res.json();
-          return result;
+          pn.config = await res.json();
         }
       })
-      .then((result) => { console.log('result', result); })
-      .catch(error => { console.log('error', error) });
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.opt-in-button').addEventListener('click', () => {
-    pn.onSubscribe();
-  });
-});
+const initApp = () => {
+  pn.setConfig();
+  document.querySelector('.opt-in-button').addEventListener('click', pn.onSubscribe);
+};
+
+document.addEventListener('DOMContentLoaded', initApp);
 

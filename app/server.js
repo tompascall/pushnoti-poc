@@ -14,5 +14,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.get('/api-config', (req, res) => {
+  res.send(JSON.stringify({
+    pushServerSocketAddress: config.get('pushServerSocketAddress'),
+  }));
+});
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

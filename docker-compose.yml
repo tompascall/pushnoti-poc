@@ -15,9 +15,10 @@ services:
     - DB_NAME=${MYSQL_DATABASE}
     - DB_USER=root
     - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - PUSH_SERVER_HOST
     - PUSH_SERVER_PORT
   db:
-    build: ./database
+    build: ./store
     environment:
     - MYSQL_ROOT_PASSWORD
     - MYSQL_DATABASE
@@ -29,5 +30,7 @@ services:
     volumes:
     - ./app:/usr/src/app
     environment:
-    - APP_SERVER_PORT
     - APP_SERVER_HOST
+    - APP_SERVER_PORT
+    - PUSH_SERVER_SOCKET_ADDRESS
+
