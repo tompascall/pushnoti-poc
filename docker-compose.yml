@@ -5,21 +5,29 @@ services:
     build: ./push-server
     command: nodemon server.js
     ports:
-    - "8123:8123"
+    - "${PUSH_SERVER_PORT}:${PUSH_SERVER_PORT}"
     volumes:
     - ./push-server:/usr/src/push-server
     depends_on:
     - db
     environment:
-    - DATABASE_HOST=db
+    - DB_HOST=db
+    - DB_NAME=${MYSQL_DATABASE}
+    - DB_USER=root
+    - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - PUSH_SERVER_PORT
   db:
     build: ./database
-    # volumes:
-    # - "./data/pn.sql:/docker-entrypoint-initdb.d/000.sql"
+    environment:
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_DATABASE
   app:
     build: ./app
     command: nodemon --ext js,html,css server.js
     ports:
-    - "8124:8124"
+    - "${APP_SERVER_PORT}:${APP_SERVER_PORT}"
     volumes:
     - ./app:/usr/src/app
+    environment:
+    - APP_SERVER_PORT
+    - APP_SERVER_HOST

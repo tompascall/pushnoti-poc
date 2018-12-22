@@ -1,5 +1,0 @@
-CREATE TABLE DEVICE (
-  id      INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  path    VARCHAR(40)                    NULL
-)
-  ENGINE = INNODB;

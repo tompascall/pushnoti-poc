@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
+const config = require('./config');
 
-const PORT = 8124;
-const HOST = '0.0.0.0';
+const PORT = config.get('appServerPort');
+const HOST = config.get('appServerHost');
+
 
 const app = express();
 app.use('/assets', express.static('public'));

@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const config = require('../config');
 
 function DataBaseHandler() {
     this.connection = null;
@@ -7,11 +8,10 @@ function DataBaseHandler() {
 DataBaseHandler.prototype.createConnection = function () {
 
     this.connection = mysql.createConnection({
-        host: 'db',
-        user: 'root',
-        password: '123',
-        database: 'pn',
-	    port: 3306
+        host: config.get('db.host'),
+        user: config.get('db.user'),
+        password: config.get('db.password'),
+        database: config.get('db.name')
     });
 
     this.connection.connect(function (err) {

@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const DataBaseHandler = require('./utils/database-handler');
+const config = require('./config');
+
 const dataBaseHandler = new DataBaseHandler();
 
-const PORT = 8123;
-const HOST = '0.0.0.0';
+const PORT = config.get('pushServerPort');
+const HOST = config.get('pushServerHost');
 
 const app = express();
 app.use(bodyParser.json());
@@ -31,7 +33,7 @@ app.post('/subscribe', (req, res) => {
       console.log(error)
       res.json(error)
     }
-    res.send(JSON.stringify({ data: 'trallala' }));
+    res.send(JSON.stringify({ data: 'trallali' }));
     connection.end();
   });
 });
