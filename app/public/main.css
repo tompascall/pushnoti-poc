@@ -12,3 +12,16 @@ button.btn {
   font-size: 14px;
   outline: none;
 }
+
+.unsupported .opt-in-button {
+  display: none;
+}
+
+.unsupported-info {
+  display: none;
+  color: white;
+}
+
+.unsupported .unsupported-info {
+  display: block;
+}
