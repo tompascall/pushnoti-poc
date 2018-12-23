@@ -1,32 +1,57 @@
-const pn = (app) => ({
-  isSupported: ('serviceWorker' in navigator) && ('PushManager' in window),
+const pn = (app) => {
+  const pushnoti = {
+    isSupported: ('serviceWorker' in navigator) && ('PushManager' in window),
+    serviceWorkerRegistration: null,
+    hasPermission: null,
 
-  registerServiceWorker() {
-    return navigator.serviceWorker.register('service-worker.js')
-    .then(function(registration) {
-      console.log('Service worker successfully registered.');
-      return registration;
-    })
-    .catch(function(err) {
-      console.error('Unable to register service worker.', err);
-    });
-  },
-
-  onSubscribe() {
-    if (app.config) {
-      return fetch(`${app.config.pushServerSocketAddress}/subscribe`, {
-        method: 'POST',
-        body: JSON.stringify({ path: `some path - ${new Date().getTime()}` }),
-        headers:{
-          'Content-Type': 'application/json'
-        },
+    registerServiceWorker() {
+      return navigator.serviceWorker.register('service-worker.js')
+      .then(function(registration) {
+        console.log('Service worker successfully registered.');
+        pn.serviceWorkerRegistration = registration;
+        return registration;
       })
-    } else {
-      console.log('Config has not been loaded yet...')
-      return null;
-    }
-  },
-});
+      .catch(function(err) {
+        console.error('Unable to register service worker.', err);
+      });
+    },
+
+    askPermission() {
+      return new Promise(function(resolve, reject) {
+        const permissionResult = Notification.requestPermission(function(result) {
+          resolve(result);
+        });
+
+        if (permissionResult) {
+          permissionResult.then(resolve, reject);
+        }
+      })
+      .then(function(permissionResult) {
+        if (permissionResult !== 'granted') {
+          throw new Error('We weren\'t granted permission.');
+        }
+        pushnoti.hasPermission = true;
+        console.log('HAS PERMISION')
+      });
+    },
+
+    onSubscribe: async () => {
+      try {
+        await pushnoti.askPermission();
+        return fetch(`${app.config.pushServerSocketAddress}/subscribe`, {
+          method: 'POST',
+          body: JSON.stringify({ path: `some path - ${new Date().getTime()}` }),
+          headers:{
+            'Content-Type': 'application/json'
+          },
+        })
+      } catch(e) {
+        console.log(e);
+      }
+    },
+  };
+  return pushnoti;
+};
 
 const pnApp = {
   setConfig: async function () {
