@@ -1,8 +1,20 @@
-const pn = {
+const pn = (app) => ({
   isSupported: ('serviceWorker' in navigator) && ('PushManager' in window),
+
+  registerServiceWorker() {
+    return navigator.serviceWorker.register('service-worker.js')
+    .then(function(registration) {
+      console.log('Service worker successfully registered.');
+      return registration;
+    })
+    .catch(function(err) {
+      console.error('Unable to register service worker.', err);
+    });
+  },
+
   onSubscribe() {
-    if (pn.config) {
-      return fetch(`${pn.config.pushServerSocketAddress}/subscribe`, {
+    if (app.config) {
+      return fetch(`${app.config.pushServerSocketAddress}/subscribe`, {
         method: 'POST',
         body: JSON.stringify({ path: `some path - ${new Date().getTime()}` }),
         headers:{
@@ -14,31 +26,39 @@ const pn = {
       return null;
     }
   },
+});
 
+const pnApp = {
   setConfig: async function () {
-    await fetch(`${location.origin}/api-config`)
+    return await fetch(`${location.origin}/api-config`)
       .then(async (res) => {
         if (!res.ok) {
           throw new Error('BAD');
         } else {
-          pn.config = await res.json();
+          pnApp.config = await res.json();
+          console.log(pnApp.config)
         }
       })
   },
 };
 
-const setupView = () => {
-  if (!pn.isSupported) {
-    document.querySelector('.opt-in-button').addEventListener('click', pn.onSubscribe);
+const setupView = ({ supported, pushnoti } = {}) => {
+  if (supported) {
+    document.querySelector('.opt-in-button').addEventListener('click', pushnoti.onSubscribe);
   } else {
     document.querySelector('body').classList.add('unsupported');
   }
 };
 
-const initApp = () => {
-  pn.setConfig();
-  setupView();
+const start = (pushnoti) => async () => {
+  if (pushnoti.isSupported) {
+    setupView({supported: true, pushnoti });
+    await pnApp.setConfig();
+    pushnoti.registerServiceWorker();
+  } else {
+    setupView({ supported: false })
+  }
 };
 
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('DOMContentLoaded', start(pn(pnApp)));
 
