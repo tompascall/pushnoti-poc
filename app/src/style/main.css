@@ -1,0 +1,27 @@
+body {
+  background: steelblue;
+  font-family: monospace;
+}
+
+button.btn {
+  border-radius: 6px;
+  padding: 15px;
+  margin: 5px;
+  background: bisque;
+  font-family: monospace;
+  font-size: 14px;
+  outline: none;
+}
+
+.unsupported .opt-in-button {
+  display: none;
+}
+
+.unsupported-info {
+  display: none;
+  color: white;
+}
+
+.unsupported .unsupported-info {
+  display: block;
+}

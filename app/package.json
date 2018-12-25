@@ -3,12 +3,20 @@
   "version": "1.0.0",
   "description": "minimal app for testing push noti",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack",
+    "build:watch": "webpack --watch"
   },
   "author": "tompascall",
   "license": "ISC",
   "dependencies": {
     "convict": "^4.4.1",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "css-loader": "^2.0.2",
+    "mini-css-extract-plugin": "^0.5.0",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
   }
 }

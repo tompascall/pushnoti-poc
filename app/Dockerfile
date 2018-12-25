@@ -4,5 +4,6 @@ RUN npm install -g nodemon
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["node", "server.js"]
+RUN npm run build
+CMD ["node", "src/server/start.js"]
 

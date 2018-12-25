@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const config = require('./config');
+const config = require('../config');
 
 const PORT = config.get('appServerPort');
 const HOST = config.get('appServerHost');
@@ -11,7 +11,8 @@ app.use('/assets', express.static('public'));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  console.log(__dirname)
+  res.sendFile(path.join(__dirname + '../../index.html'));
 });
 
 app.get('/api-config', (req, res) => {

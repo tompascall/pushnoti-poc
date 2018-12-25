@@ -27,11 +27,9 @@ services:
     - MYSQL_DATABASE
   app:
     build: ./app
-    command: nodemon --ext js,html,css server.js
+    command: nodemon --ext js,htm,css src/server/start.js
     ports:
     - "${APP_SERVER_PORT}:${APP_SERVER_PORT}"
-    volumes:
-    - ./app:/usr/src/app
     environment:
     - APP_SERVER_HOST
     - APP_SERVER_PORT
