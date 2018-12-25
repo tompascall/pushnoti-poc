@@ -21,19 +21,20 @@ app.get('/', (req, res) => {
   res.send('push server is running');
 });
 
-app.post('/subscribe', (req, res) => {
+app.post('/save-subscription', (req, res) => {
   const { body: {
-    path
+    endpoint,
+    keys,
   } } = req;
   const connection = dataBaseHandler.createConnection();
-  connection.query(`INSERT INTO DEVICE (id, path)
-  VALUES (0, ?)`,[path],
+  connection.query(`INSERT INTO DEVICE (id, endpoint, p256dh, auth)
+  VALUES (0, ?, ?, ?)`,[endpoint, keys.p256dh, keys.auth],
   (error, results, fields) => {
     if (error) {
       console.log(error)
       res.json(error)
     }
-    res.send(JSON.stringify({ data: 'trallali' }));
+    res.send(JSON.stringify({ data: { success: true } }));
     connection.end();
   });
 });

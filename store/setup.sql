@@ -1,5 +1,7 @@
 CREATE TABLE DEVICE (
-  id      INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  path    VARCHAR(40)                    NULL
+  id        INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  endpoint  VARCHAR(255),
+  p256dh    VARCHAR(255),
+  auth      VARCHAR(255)
 )
   ENGINE = INNODB;

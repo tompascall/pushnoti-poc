@@ -8,6 +8,7 @@ services:
     - "${PUSH_SERVER_PORT}:${PUSH_SERVER_PORT}"
     volumes:
     - ./push-server:/usr/src/push-server
+    - ~/.aws:/root/.aws
     depends_on:
     - db
     environment:
@@ -17,6 +18,8 @@ services:
     - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
     - PUSH_SERVER_HOST
     - PUSH_SERVER_PORT
+    - PUSH_SERVER_VAPID_PUBLIC_KEY
+    - AWS_PROFILE
   db:
     build: ./store
     environment:
@@ -33,4 +36,5 @@ services:
     - APP_SERVER_HOST
     - APP_SERVER_PORT
     - PUSH_SERVER_SOCKET_ADDRESS
+    - PUSH_SERVER_VAPID_PUBLIC_KEY
 

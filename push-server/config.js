@@ -19,6 +19,11 @@ var config = convict({
         default: '0.0.0.0',
         env: 'PUSH_SERVER_HOST',
     },
+    pushServerVapidPublicKey: {
+        doc: 'The push server vapid public key',
+        default: 'def_vap_pub_key',
+        env: 'PUSH_SERVER_VAPID_PUBLIC_KEY',
+    },
     db: {
         host: {
             doc: 'Database host name/IP',
