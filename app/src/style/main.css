@@ -11,6 +11,7 @@ button.btn {
   font-family: monospace;
   font-size: 14px;
   outline: none;
+  cursor: pointer;
 }
 
 .unsupported .opt-in-button {
