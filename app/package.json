@@ -4,6 +4,7 @@
   "description": "minimal app for testing push noti",
   "scripts": {
     "start": "node server.js",
+    "clean-build": "rm -rf public/*",
     "build": "webpack",
     "build:watch": "webpack --watch"
   },

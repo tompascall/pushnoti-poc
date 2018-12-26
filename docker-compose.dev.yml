@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  observer:
+    command: nodemon server.js
+  app:
+    build: ./app
+    command: nodemon --watch src/server src/server/start.js
+    ports:
+    - "${APP_SERVER_PORT}:${APP_SERVER_PORT}"
+    environment:
+    - APP_SERVER_HOST
+    - APP_SERVER_PORT
+    - PUSH_SERVER_SOCKET_ADDRESS
+    - PUSH_SERVER_VAPID_PUBLIC_KEY
+    volumes:
+    - ./app:/usr/src/app

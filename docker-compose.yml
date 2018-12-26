@@ -27,7 +27,7 @@ services:
     - MYSQL_DATABASE
   app:
     build: ./app
-    command: nodemon --ext js,htm,css src/server/start.js
+    command: node src/server/start.js
     ports:
     - "${APP_SERVER_PORT}:${APP_SERVER_PORT}"
     environment:
@@ -35,4 +35,3 @@ services:
     - APP_SERVER_PORT
     - PUSH_SERVER_SOCKET_ADDRESS
     - PUSH_SERVER_VAPID_PUBLIC_KEY
-
