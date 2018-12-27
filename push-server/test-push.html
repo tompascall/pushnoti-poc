@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html,body,h2,h3,label,textarea,input {
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+    }
+    h3 {
+      margin-bottom: 10px;
+    }
+    .pn-header {
+      background: darkgrey;
+      color: white;
+      display: block;
+      margin: 0;
+      text-align: center;
+      padding: 50px;
+    }
+    .pn-body {
+      margin: 30px;
+    }
+    .pn-msg {
+      margin-bottom: 10px;
+    }
+    .pn-msg label {
+      display: block;
+      margin-bottom: 3px;
+    }
+    .pn-msg textarea {
+      width: 100%;
+      height: 100px;
+      font-family: monospace;
+    }
+    .btn-submit {
+      background: lightskyblue;
+      padding: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2 class="pn-header">Push Notification Test Page</h2>
+  <div class="pn-body">
+    <h3>Send Push Message to all subscribers</h3>
+    <form action="/trigger-push-message" method="post">
+      <div class="pn-msg">
+          <label for="msg">Message payload</label>
+          <textarea type="textarea" name="msg" required>
+            {
+              "notification": {
+                "title": "Example Title",
+                "body": "The body of notification"
+              }
+            }
+          </textarea>
+        </div>
+        <div class="pn-submit">
+          <input type="submit" class="btn-submit" value="Trigger push message">
+        </div>
+    </form>
+  </div>
+</body>
+</html>
