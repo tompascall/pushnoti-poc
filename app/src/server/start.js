@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.get('/api-config', (req, res) => {
   res.send(JSON.stringify({
-    pushServerSocketAddress: config.get('pushServerSocketAddress'),
+    pushApiUrl: config.get('pushApiUrl'),
     pushServerVapidPublicKey: config.get('pushServerVapidPublicKey'),
   }));
 });

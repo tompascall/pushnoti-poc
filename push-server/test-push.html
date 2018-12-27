@@ -28,7 +28,7 @@
     }
     .pn-body h3 {
       font-size: 20px;
-      margin-bottom: 
+      margin-bottom: 30px;
     }
     .pn-msg {
       margin-bottom: 10px;
@@ -58,7 +58,7 @@
   <h2 class="pn-header">Push Notification Test Page</h2>
   <div class="pn-body">
     <h3>Send Push Message to all subscribers</h3>
-    <form action="/trigger-push-message" method="post">
+    <form action="/push-api/trigger-push-message" method="post">
       <div class="pn-msg">
           <label for="msg">Message payload</label>
           <textarea type="textarea" name="msg" required>

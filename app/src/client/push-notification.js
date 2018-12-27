@@ -56,7 +56,7 @@ export default (app) => {
     },
 
     sendSubscriptionToBackEnd(subscription) {
-      return fetch(`${app.config.pushServerSocketAddress}/save-subscription`, {
+      return fetch(`${app.config.pushApiUrl}/save-subscription`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

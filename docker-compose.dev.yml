@@ -11,7 +11,7 @@ services:
     environment:
     - APP_SERVER_HOST
     - APP_SERVER_PORT
-    - PUSH_SERVER_SOCKET_ADDRESS
+    - PUSH_API_URL
     - PUSH_SERVER_VAPID_PUBLIC_KEY
     volumes:
     - ./app:/usr/src/app
