@@ -7,8 +7,8 @@ router.get('/', function (req, res) {
 })
 
 router.post('/trigger-push-message', [
-  push.parseMessage,
-
+  push.triggerPushMessage,
+  (req, res) => res.status(200).send('Success!')
 ]);
 
 router.post('/save-subscription', push.saveSubscription);

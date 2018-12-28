@@ -24,6 +24,10 @@ var config = convict({
         default: 'def_vap_pub_key',
         env: 'PUSH_SERVER_VAPID_PUBLIC_KEY',
     },
+    pushServerMailto: {
+        doc: 'Push server mailto address',
+        default: 'push.notification@lensa.com',
+    },
     db: {
         host: {
             doc: 'Database host name/IP',
