@@ -1,11 +1,11 @@
-const dataBaseHandler = new (require('../utils/database-handler'))();
+const store = require('./store');
 
 exports.saveSubscription = (req, res) => {
   const { body: {
     endpoint,
     keys,
   } } = req;
-  const connection = dataBaseHandler.createConnection();
+  const connection = store.createConnection();
   connection.query(`INSERT INTO DEVICE (id, endpoint, p256dh, auth)
   VALUES (0, ?, ?, ?)`,[endpoint, keys.p256dh, keys.auth],
   (error, results, fields) => {
