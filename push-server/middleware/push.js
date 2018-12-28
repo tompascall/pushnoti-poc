@@ -6,6 +6,7 @@ const aws = require('../utils/aws');
 aws.getPushServerKey
 
   .then(vapidServerKey => {
+    console.log('GOT VAPID PRIVATE KEY', vapidServerKey)
     webpush.setVapidDetails(
       `mailto:${config.get('pushServerMailto')}`,
       config.get('pushServerVapidPublicKey'),
@@ -44,6 +45,7 @@ exports.saveSubscription = (req, res) => {
 const parseMessage = (req, res) => {
   const { body } = req;
   try {
+    JSON.parse(body.msg);
     return body.msg;
   }
   catch(e) {
@@ -71,10 +73,11 @@ const deleteSubscriptionFromStore = (id) => {
 };
 
 const sendMessageToSubscriber = (subscription, message) => {
-  return webpush.sendNotification(subscription, message)
+  return webpush.sendNotification(subscription, message )
+  .then((result) => { console.log('SEND MESSAGE TO SUBSCRIBER', result) })
   .catch((err) => {
     if (err.statusCode === 410) {
-      return deleteSubscriptionFromStore(subscription.id);
+      return deleteSubscriptionFromStore(subscription);
     } else {
       console.log('Subscription is no longer valid: ', err);
     }
@@ -102,5 +105,5 @@ exports.triggerPushMessage = async (req, res, next) => {
 
     queue
       .then(() => next())
-      .catch(next)
+      .catch((e) => { throw e; })
 };

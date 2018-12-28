@@ -7,9 +7,13 @@ export default (app) => {
     hasPermission: null,
 
     registerServiceWorker() {
+      if (pushnoti.registration) {
+        return Promise.resolve(pushnoti.registration);
+      }
       return navigator.serviceWorker.register('service-worker.js')
       .then(function(registration) {
         console.log('Service worker successfully registered.');
+        pushnoti.registration = registration;
         return registration;
       })
       .catch(function(err) {

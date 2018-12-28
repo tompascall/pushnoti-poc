@@ -9,9 +9,10 @@ const pnApp = app();
 const start = (pushnoti) => async () => {
   if (pushnoti.isSupported) {
     pnView.setup({supported: true, pushnoti });
+    pushnoti.registerServiceWorker();
     await pnApp.setConfig();
   } else {
-    pvView.setup({ supported: false })
+    pnView.setup({ supported: false })
   }
 };
 
