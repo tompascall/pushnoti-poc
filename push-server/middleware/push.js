@@ -31,7 +31,10 @@ exports.saveSubscription = (req, res) => {
   } } = req;
   const connection = store.createConnection();
   connection.query(`INSERT INTO DEVICE (id, endpoint, p256dh, auth)
-  VALUES (0, ?, ?, ?)`,[endpoint, keys.p256dh, keys.auth],
+    SELECT 0, ?, ?, ?
+    FROM dual
+    WHERE NOT EXISTS (SELECT 1 FROM DEVICE WHERE endpoint=?)`,
+    [endpoint, keys.p256dh, keys.auth, endpoint],
   (error, results, fields) => {
     if (error) {
       console.log(error)

@@ -41,22 +41,26 @@ export default (app) => {
       });
     },
 
-    subscribeUserToPush() {
+    getSubscription() {
       return pushnoti.registerServiceWorker()
-      .then(function(registration) {
-        const subscribeOptions = {
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(app.config.pushServerVapidPublicKey),
-        };
-        return registration.pushManager.subscribe(subscribeOptions);
-      })
-      .then((pushSubscription) => {
-        console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
-        return pushSubscription;
-      })
-      .catch((error) => {
-        console.log('Something bad happened during push subscription', error)
-      });
+        .then(registration => registration.pushManager.getSubscription())
+        .then (s => { console.log('HAS SUBSCTIPTION:', s); return s })
+    },
+
+    subscribe(registration) {
+      const subscribeOptions = {
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(app.config.pushServerVapidPublicKey),
+      };
+      return pushnoti.registerServiceWorker()
+        .then(registration => registration.pushManager.subscribe(subscribeOptions))
+        .then(s => {
+          console.log('JUST HAS SUBSCRIBED', s)
+          return s;
+        })
+        .catch((error) => {
+          console.log('Something bad happened during push subscription', error)
+        });
     },
 
     sendSubscriptionToBackEnd(subscription) {
@@ -83,7 +87,7 @@ export default (app) => {
     onSubscribe: (onSuccess, onError) => async () => {
       try {
         await pushnoti.askPermission();
-        const subscription = await pushnoti.subscribeUserToPush();
+        const subscription = await pushnoti.subscribe();
         await pushnoti.sendSubscriptionToBackEnd(subscription);
         onSuccess();
       } catch(e) {

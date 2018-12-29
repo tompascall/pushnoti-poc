@@ -14,15 +14,23 @@ button.btn {
   cursor: pointer;
 }
 
-.unsupported .opt-in-button {
+.pn-subscribe-button, .pn-unsupported-info, .pn-has-subscription-info {
   display: none;
 }
 
-.unsupported-info {
+body.pn-supported .pn-subscribe-button {
+  display: block;
+}
+
+body.pn-supported.pn-has-subscription .pn-subscribe-button {
   display: none;
+}
+
+body.pn-unsupported .pn-unsupported-info {
+  display: block;
   color: white;
 }
 
-.unsupported .unsupported-info {
+body.pn-supported.pn-has-subscription .pn-has-subscription-info {
   display: block;
 }

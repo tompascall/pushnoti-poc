@@ -19,6 +19,11 @@ App is running on `localhost:8124`. You can subscribe for push notification. You
 
 Push server is running on `localhost:8123`. There is a test page for testing push messages: `localhost:8123/test-push`.
 
-####Useful article about push notification
+####Useful articles about push notification
 
 https://developers.google.com/web/fundamentals/push-notifications/how-push-works
+
+https://developer.mozilla.org/en-US/docs/Web/API/notification
+
+https://developers.google.com/web/fundamentals/primers/service-workers/
+

@@ -8,9 +8,15 @@ const pnApp = app();
 
 const start = (pushnoti) => async () => {
   if (pushnoti.isSupported) {
-    pnView.setup({supported: true, pushnoti });
-    pushnoti.registerServiceWorker();
+    // TODO: set config in pushnoti if needed and remove from here
     await pnApp.setConfig();
+    const subscription = await pushnoti.getSubscription();
+    if (subscription) {
+      pnView.setup({supported: true, hasSubscription: true });
+      pushnoti.sendSubscriptionToBackEnd(subscription)
+    } else {
+      pnView.setup({supported: true, pushnoti });
+    }
   } else {
     pnView.setup({ supported: false })
   }
