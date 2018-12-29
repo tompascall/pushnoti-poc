@@ -1,4 +1,7 @@
-console.log('Service worker is loaded');
+self.addEventListener('install', event => {
+  self.skipWaiting();
+  console.log('installing worker');
+});
 
 self.addEventListener('push', function(event) {
   let notification = {
