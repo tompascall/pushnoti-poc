@@ -3,6 +3,10 @@ body {
   font-family: monospace;
 }
 
+a {
+  text-decoration: none;
+  color: orange;
+}
 button.btn {
   border-radius: 6px;
   padding: 15px;
@@ -14,21 +18,21 @@ button.btn {
   cursor: pointer;
 }
 
-.pn-subscribe-button, .pn-unsupported-info, .pn-has-subscription-info {
+.pn-need-subscription, .pn-unsupported-info, .pn-has-subscription-info {
   display: none;
+  color: white;
 }
 
-body.pn-supported .pn-subscribe-button {
+body.pn-supported .pn-need-subscription {
   display: block;
 }
 
-body.pn-supported.pn-has-subscription .pn-subscribe-button {
+body.pn-supported.pn-has-subscription .pn-need-subscription {
   display: none;
 }
 
 body.pn-unsupported .pn-unsupported-info {
   display: block;
-  color: white;
 }
 
 body.pn-supported.pn-has-subscription .pn-has-subscription-info {

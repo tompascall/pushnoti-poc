@@ -6,7 +6,7 @@ const view = () => {
   const pnView = {
     setup({ supported, pushnoti, hasSubscription } = {}) {
       pnView.setupSupport(supported);
-      pnView.setupSubscription(hasSubscription);
+      pnView.setupSubscription(hasSubscription, pushnoti);
     },
 
     setupSupport(supported) {
@@ -15,10 +15,10 @@ const view = () => {
         document.querySelector('body').classList.add('pn-unsupported');
     },
 
-    setupSubscription(hasSubscription) {
+    setupSubscription(hasSubscription, pushnoti) {
       (hasSubscription) ?
         document.querySelector('body').classList.add('pn-has-subscription') :
-        document.querySelector('.subscribe-button')
+        document.querySelector('.pn-subscribe-button')
           .addEventListener('click', pushnoti.onSubscribe(pnView.toastCb({
             type: 'success',
             title: 'Wow',

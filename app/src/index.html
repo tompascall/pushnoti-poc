@@ -10,10 +10,18 @@
 </head>
 <body>
   <div class="pn-unsupported-info">
-    <h2>Sorry, but push notification is not supported on this browser</h2>
+    <h3>Sorry, but push notification is not supported on this browser</h3>
   </div>
-  <div class="pn-has-subscription">YEY, ALREADY HAS SUBSCRIPTION!</div>
-  <button class="pn-need-subscribe btn pn-subscribe-button">Subscribe for notification</button>
+
+  <div class="pn-has-subscription-info">
+    <h3>Yey, already has subscription. Trigger a push message from <a href="<%= htmlWebpackPlugin.options.testPageUrl %>">test page</a>!</h3>
+  </div>
+
+  <div class="pn-need-subscription">
+    <h3>You haven‘t subscribed yet, or your subscription has expired</h3>
+    <button class="btn pn-subscribe-button">Subscribe for notification</button>
+  </div>
+
   <script src="assets/main.js"></script>
 </body>
 </html>

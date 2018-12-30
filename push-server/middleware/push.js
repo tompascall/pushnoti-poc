@@ -24,25 +24,29 @@ const initWebpush = async () => {
   }
 };
 
-exports.saveSubscription = (req, res) => {
+exports.saveSubscription = async (req, res, next) => {
   const { body: {
     endpoint,
     keys,
   } } = req;
   const connection = store.createConnection();
-  connection.query(`INSERT INTO DEVICE (id, endpoint, p256dh, auth)
-    SELECT 0, ?, ?, ?
-    FROM dual
-    WHERE NOT EXISTS (SELECT 1 FROM DEVICE WHERE endpoint=?)`,
-    [endpoint, keys.p256dh, keys.auth, endpoint],
-  (error, results, fields) => {
-    if (error) {
-      console.log(error)
-      res.json(error)
-    }
-    res.send(JSON.stringify({ data: { success: true } }));
-    connection.end();
-  });
+  try {
+    await connection.query(`INSERT INTO DEVICE (id, endpoint, p256dh, auth)
+      SELECT 0, ?, ?, ?
+      FROM dual
+      WHERE NOT EXISTS (SELECT 1 FROM DEVICE WHERE endpoint=?)`,
+      [endpoint, keys.p256dh, keys.auth, endpoint],
+    (error, results, fields) => {
+      if (error) {
+        console.log(error)
+        res.json(error)
+      }
+      res.send(JSON.stringify({ data: { success: true } }));
+      connection.end();
+    });
+  } catch(e) {
+    next(e);
+  }
 };
 
 const parseMessage = (req, res) => {

@@ -11,7 +11,7 @@ app.use('/assets', express.static('public'));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '../../index.html'));
+  res.sendFile(path.join(__dirname + '../../public/index.html'));
 });
 
 app.get('/api-config', (req, res) => {

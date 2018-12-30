@@ -23,6 +23,11 @@ var config = convict({
         default: 'localhost:8080',
         env: 'PUSH_API_URL',
     },
+    testPageUrl: {
+        doc: 'Test page url.',
+        default: 'localhost:8083',
+        env: 'TEST_PAGE_URL',
+    },
     pushServerVapidPublicKey: {
         doc: 'The push server vapid public key',
         default: 'def_vap_pub_key',

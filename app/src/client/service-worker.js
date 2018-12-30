@@ -17,7 +17,7 @@ self.addEventListener('push', function(event) {
   }
   const promiseChain = self.registration.showNotification(notification.title, {
     body: notification.body,
-  });
+  }).then(result => { console.log('result', result); return result });
 
   event.waitUntil(promiseChain);
 });
