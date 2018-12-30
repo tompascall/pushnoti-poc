@@ -2,7 +2,7 @@
 
 #### Prerequisites
 
-Test application key has benn saved to AWS Secret Manager. To use the key you have to
+Test application key has been saved to AWS Secret Manager. To use the key you have to
 `saml2aws login`.
 
 #### Development
