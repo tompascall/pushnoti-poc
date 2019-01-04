@@ -7,7 +7,6 @@ services:
     ports:
     - "${PUSH_SERVER_PORT}:${PUSH_SERVER_PORT}"
     volumes:
-    - ./push-server:/usr/src/push-server
     - ~/.aws:/root/.aws
     depends_on:
     - db
