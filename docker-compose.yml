@@ -34,3 +34,4 @@ services:
     - APP_SERVER_PORT
     - PUSH_API_URL
     - PUSH_SERVER_VAPID_PUBLIC_KEY
+    - TEST_PAGE_URL
