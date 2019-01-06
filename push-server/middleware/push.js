@@ -14,6 +14,11 @@ aws.getPushServerKey
     );
   })
   .catch(e => {
+    console.error(e.code);
+    if (e.code === 'UnrecognizedClientException') {
+      console.log('\x1b[31m','*** Your AWS authentication is failed, please login and try again ***','\x1b[0m');
+      throw e;
+    }
     throw e;
   });
 
