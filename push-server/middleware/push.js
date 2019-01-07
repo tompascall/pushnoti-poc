@@ -15,11 +15,14 @@ aws.getPushServerKey
   })
   .catch(e => {
     console.error(e.code);
-    if (e.code === 'UnrecognizedClientException') {
-      console.log('\x1b[31m','*** Your AWS authentication is failed, please login and try again ***','\x1b[0m');
-      throw e;
+    switch (e.code) {
+      case 'ExpiredTokenException':
+        console.log('\x1b[31m','*** Your AWS token expired, please login and try again ***','\x1b[0m');
+      case 'UnrecognizedClientException':
+        console.log('\x1b[31m','*** Your AWS authentication is failed, please login and try again ***','\x1b[0m');
+      default:
+        throw e;
     }
-    throw e;
   });
 
 const initWebpush = async () => {
