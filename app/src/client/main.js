@@ -8,7 +8,6 @@ const pnApp = app();
 
 const start = (pushnoti) => async () => {
   if (pushnoti.isSupported) {
-    // TODO: set config in pushnoti if needed and remove from here
     await pnApp.setConfig();
     const subscription = await pushnoti.getSubscription();
     if (subscription) {
