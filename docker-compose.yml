@@ -3,7 +3,7 @@ version: "3"
 services:
   observer:
     build: ./push-server
-    command: nodemon --ext html,js,css server.js
+    command: node server.js
     ports:
     - "${PUSH_SERVER_PORT}:${PUSH_SERVER_PORT}"
     volumes:
