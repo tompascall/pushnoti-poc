@@ -4,7 +4,6 @@ const config = require('../config');
 const aws = require('../utils/aws');
 
 aws.getPushServerKey
-
   .then(vapidServerKey => {
     console.log('GOT VAPID PRIVATE KEY', vapidServerKey)
     webpush.setVapidDetails(
@@ -24,13 +23,6 @@ aws.getPushServerKey
         throw e;
     }
   });
-
-const initWebpush = async () => {
-  try {
-  } catch (e) {
-    throw e;
-  }
-};
 
 exports.saveSubscription = async (req, res, next) => {
   const { body: {
@@ -71,7 +63,7 @@ const parseMessage = (req, res) => {
 const getSubscriptions = () => {
   const connection = store.createConnection();
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM DEVICE LIMIT 1;`,
+    connection.query(`SELECT * FROM DEVICE;`,
     (error, results, fields) => {
       if (error) {
         console.log(error)
