@@ -7,9 +7,9 @@ Test application key has been saved to AWS Secret Manager. To use the key you ha
 
 #### Development
 
-`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build`
+`cd app && npm i && npm run build:watch`
 
-`cd app && npm run build:watch`
+`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build`
 
 ##### App
 
