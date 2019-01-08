@@ -30,7 +30,7 @@ For testing purpose it serves a static page to compose and trigger push message:
 
 ##### Store
 
-Mysql db to store subscription. The database name is `pn`. The we create `DEVICE` table to store subscription data.
+Mysql db to store subscription. The database name is `pn`. The we create `subscriptions` table to store subscription data.
 
 #### Config
 
