@@ -31,10 +31,10 @@ exports.saveSubscription = async (req, res, next) => {
   } } = req;
   const connection = store.createConnection();
   try {
-    await connection.query(`INSERT INTO DEVICE (id, endpoint, p256dh, auth)
+    await connection.query(`INSERT INTO subscriptions (id, endpoint, p256dh, auth)
       SELECT 0, ?, ?, ?
       FROM dual
-      WHERE NOT EXISTS (SELECT 1 FROM DEVICE WHERE endpoint=?)`,
+      WHERE NOT EXISTS (SELECT 1 FROM subscriptions WHERE endpoint=?)`,
       [endpoint, keys.p256dh, keys.auth, endpoint],
     (error, results, fields) => {
       if (error) {
@@ -63,7 +63,7 @@ const parseMessage = (req, res) => {
 const getSubscriptions = () => {
   const connection = store.createConnection();
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM DEVICE;`,
+    connection.query(`SELECT * FROM subscriptions;`,
     (error, results, fields) => {
       if (error) {
         console.log(error)
