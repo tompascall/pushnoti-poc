@@ -5,6 +5,37 @@
 Test application key has been saved to AWS Secret Manager. To use the key you have to
 `saml2aws login`.
 
+#### Architecture
+
+We use 3 Docker containers for composing project:
+
+##### App
+
+Simple static page to test the frontend components of push notification:  
+- feature detection
+- check subscription
+- ask permission
+
+##### Push server
+
+This server saves subscription, and has an endpoint to send a push message to all subscribers.
+
+Default url: `http://localhost:8123`
+
+Endpoints:
+- `/push-api/save-subscription`
+- `/push-api/trigger-push-message`
+
+For testing purpose it serves a static page to compose and trigger push message: `/test-push`
+
+##### Store
+
+Mysql db to store subscription. The database name is `pn`. The we create `DEVICE` table to store subscription data.
+
+#### Config
+
+The config is set in `.env` file in project root.
+
 #### Development
 
 `cd app && npm i && npm run build:watch`
