@@ -56,5 +56,6 @@ https://developers.google.com/web/fundamentals/push-notifications/how-push-works
 
 https://developer.mozilla.org/en-US/docs/Web/API/notification
 
-https://developers.google.com/web/fundamentals/primers/service-workers/
+https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle
 
+https://developers.google.com/web/fundamentals/primers/service-workers/
