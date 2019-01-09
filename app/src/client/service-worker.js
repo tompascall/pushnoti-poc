@@ -15,16 +15,26 @@ self.addEventListener('push', function(event) {
   } else {
     console.log('This push event has no data.');
   }
-  const promiseChain = self.registration.showNotification(notification.title, {
-    body: notification.body,
+  const { title, body, icon, actions, requireInteraction } = notification;
+  const promiseChain = self.registration.showNotification(title, {
+    body,
+    icon,
+    actions,
+    requireInteraction
   }).then(result => { console.log('result', result); return result });
 
   event.waitUntil(promiseChain);
 });
 
-self.addEventListener('notificationclose', function(e) {
-  var notification = e.notification;
-  var primaryKey = notification.data.primaryKey;
+self.addEventListener('notificationclick', function(event) {
+  const clickedNotification = event.notification;
+  clickedNotification.close();
 
-  console.log('Closed notification: ' + primaryKey);
+  const examplePage = '/personal-page';
+  const promiseChain = clients.openWindow(examplePage);
+  event.waitUntil(promiseChain);
+});
+
+self.addEventListener('notificationclose', function(e) {
+  console.log('Notification has been closed');
 });
