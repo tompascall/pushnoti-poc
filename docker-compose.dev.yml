@@ -3,8 +3,6 @@ version: "3"
 services:
   observer:
     command: nodemon -e js,html server.js
-    volumes:
-    - ./push-server:/usr/src/push-server
   app:
     build: ./app
     command: nodemon --watch src/server src/server/start.js
