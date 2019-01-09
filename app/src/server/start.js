@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '../../public/index.html'));
 });
 
+app.get('/personal-page', (req, res) => {
+  res.status(200).send('Personal Page');
+});
+
 app.get('/api-config', (req, res) => {
   res.send(JSON.stringify({
     pushApiUrl: config.get('pushApiUrl'),
